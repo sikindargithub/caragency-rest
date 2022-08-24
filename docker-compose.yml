@@ -1,0 +1,23 @@
+version: "3"
+services:
+  car-api:
+    image: sikindar123/carrepo:car-api
+    networks:
+      - car-mysql
+    ports:
+      - "8090:8080"
+    depends_on:
+      - mysqldb
+    build:
+      context: ./
+      dockerfile: Dockerfile
+
+  mysqldb:
+    image: mysql:8
+    networks:
+      - car-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=springproject
+networks:
+  car-mysql:
